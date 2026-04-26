@@ -10,22 +10,14 @@
 MouseSpot acts as a low-latency, strictly offline hand-tracking mouse overlay. Native Wayland/X11 bindings allow seamless, system-level cursor control without being constrained to a single application window.
 
 <!-- add demo.gif here -->
-> *Placeholder: Hero GIF demonstrating the system*
+
+
+https://github.com/user-attachments/assets/bc15e638-9c0a-4d8d-a1b7-1231e1f597ed
+
+
 
 ---
 
-## 🏗 Architecture
-
-```mermaid
-flowchart TD
-    A[Webcam] -->|Frames| B[MediaPipe Tracker]
-    B -->|Coordinates| C[Coordinate Smoother]
-    B -->|Hand Shape| D[Gesture Classifier]
-    D -->|Gesture Enum| E[Mouse Controller]
-    C -->|Smoothed (X, Y)| E
-    E -->|Wayland/X11 API| F[OS GUI Layer]
-    B -->|Annotated Frame| G[OpenCV Overlay Window]
-```
 
 ## 🚀 Quick Install
 
