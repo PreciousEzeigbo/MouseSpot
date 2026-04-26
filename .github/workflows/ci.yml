@@ -1,0 +1,38 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_and_test:
+    name: Lint, Type Check, and Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        run: pip install uv
+        
+      - name: Sync Dependencies
+        run: uv sync
+
+      - name: Verify Code Formatting & Linting (Ruff)
+        run: uv run ruff check src/ tests/
+
+      - name: Static Type Checking (Mypy)
+        run: uv run mypy src/ tests/
+
+      - name: Run Unit Tests (Pytest)
+        run: uv run pytest tests/ -v
